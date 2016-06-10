@@ -1,0 +1,68 @@
+DataPrep:
+	StockCorrelation(closing_stock_price): 
+			Initialize with a NxM matrix with N stocks and M closing prices
+		
+		get_similar_stocklist(stock_index):
+			0 <= stock_index <= N. Enter a int representing a stock from the data used to initialize
+			
+			Returns a N-1 list containing the indices of stocks ranging from highest correlation to lowest
+
+
+
+import numpy as np
+import numbers
+import itertools
+
+
+class SVM:
+
+    def __init__(self, gamma=1, class_weight=1):
+        self.training_param = None
+        self.training_class = None
+        self.params = []
+
+        # assume class weight is the same for each example
+        # otherwise finding a vector of optimal weights for each example would take too long, if even possible
+        if isinstance(class_weight, numbers.Number):
+            if class_weight > 0:
+                self.class_weight = class_weight
+            else:
+                raise "Class weight must be bigger than 0"
+        else:
+            raise "Size of class_weight vector should be equal to number of classes"
+
+        if isinstance(gamma, numbers.Number):
+            self.gamma = gamma
+        else:
+            raise "Gamma needs to be a number"
+
+    def set_params(self, params):
+        self.params = params
+
+    # returns an 1-D vector with the gamma and class weight
+    def get_params(self):
+        return self.params
+
+    def rbf_kernel(self, x1, x2):
+        return np.exp(- self.gamma * np.linalg.norm(x1, x2) ** 2)
+
+    def h_(self, vector, class_param):
+
+
+
+    def fit(self, x, y=None, gamma=0, class_weight=0):
+        self.training_param = x
+        self.training_class = y
+
+        if gamma != 0:
+            self.gamma = gamma
+        if class_weight != 0:
+            self.class_weight = class_weight
+
+        gram_matrix = self.rbf_kernel(list(itertools.product(self.training_param, self.training_param)))
+
+        self.param_
+        #from sklearn.metrics import accuracy_score
+        #return accuracy_score(y, self.predict(X), sample_weight=sample_weight)
+
+        return self
